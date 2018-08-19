@@ -20,7 +20,7 @@
 			<key>Key</key>
 			<string>server_address</string>
 			<key>DefaultValue</key>
-			<string>https://sandbox.gocco.co.jp/machikon/index.html</string>
+			<string>http://192.168.101.22:8080</string>
 		</dict>
 	</array>
 </dict>

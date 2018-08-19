@@ -9,7 +9,7 @@ class ExtWebView: WKWebView, WKUIDelegate {
         
         self.uiDelegate = self
         
-        // ネイティブからjavascriptへ連携するためのデリゲート
+        // NOTE: ネイティブからjavascriptへ連携するためのデリゲート
         self.navigationDelegate = self
         
         // NOTE: iPhoneXで上下のsafe areaにコンテンツが表示されない問題を解決するためのコード
@@ -48,9 +48,7 @@ class ExtWebView: WKWebView, WKUIDelegate {
         //       (%@)には引数となるデータが入る
         let format = command + "('%@')"
         let jscript = String(format: format, jsonStr)
-        self.evaluateJavaScript(jscript, completionHandler: { (object, error) -> Void in
-            print( "response: \(object)" )
-        })
+        self.evaluateJavaScript(jscript, completionHandler: { (object, error) -> Void in})
     }
 }
 

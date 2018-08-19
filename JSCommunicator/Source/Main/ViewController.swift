@@ -20,16 +20,18 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // NOTE: Javascriptを有効にする設定
         let jscript = "var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);"
         let userScript = WKUserScript(source: jscript, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
         let wkUController = WKUserContentController()
         wkUController.addUserScript(userScript)
-        // NOTE: Javascriptからのcallback名を指定する
-        wkUController.add(self, name: "glassId")
+        // NOTE: Javascriptからのcallback名を指定する。
+        //       Javascript側は登録したコールバック名を適宜呼び出すことで、Nativeと連携できる。
+        wkUController.add(self, name: "helloNative")
         
         let webConfiguration = WKWebViewConfiguration()
         webConfiguration.userContentController = wkUController
-        // LocalStorageを許可
+        // NOTE: LocalStorageを許可
         webConfiguration.websiteDataStore = WKWebsiteDataStore.default()
         webView = ExtWebView(frame: .zero, configuration: webConfiguration)
         webView.loadWithAddress(address: Settings.serverAddress)
@@ -39,39 +41,23 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
         createDummyButton()
     }
     
+    // NOTE: This code comes from following link.
+    //       https://i-app-tec.com/ios/button-code.html
     func createDummyButton() {
         // スクリーンの横縦幅
         let screenWidth:CGFloat = self.view.frame.width
         let screenHeight:CGFloat = self.view.frame.height
         
-        let label = UILabel()
-        
-        // ボタンのインスタンス生成
         let button = UIButton()
-        
-        // ボタンの位置とサイズを設定
         button.frame = CGRect(x:screenWidth/4, y:screenHeight/2,
                               width:screenWidth/2, height:50)
-        
-        // ボタンのタイトルを設定
-        button.setTitle("Tap me!", for:UIControlState.normal)
-        
-        // タイトルの色
-        //        button.setTitleColor(UIColor.white, for: .normal)
-        
-        // ボタンのフォントサイズ
+        button.setTitle("Notify 2 JS!", for:UIControlState.normal)
         button.titleLabel?.font =  UIFont.systemFont(ofSize: 36)
-        
-        // 背景色
         button.backgroundColor = UIColor.init(
             red:0.9, green: 0.9, blue: 0.9, alpha: 1)
-        
-        // タップされたときのaction
         button.addTarget(self,
                          action: #selector(ViewController.buttonTapped(sender:)),
                          for: .touchUpInside)
-        
-        // Viewにボタンを追加
         self.view.addSubview(button)
     }
     
@@ -79,16 +65,17 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
     override var prefersStatusBarHidden: Bool { return true }
     
     @objc func buttonTapped(sender: UIButton) {
-        webView.notify2JS(command: "NativeCommunicator.onCheers", payload: ["device_ids":[1, 2, 4]])
+        // NOTE: Javascriptへメッセージを送信する
+        webView.notify2JS(command: "NativeCommunicator.helloJavascript", payload: ["message":NSUUID().uuidString])
     }
 }
 
 extension ViewController: WKScriptMessageHandler {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        if message.name == "glassId" {
-            let number = message.body as! String
-            // NOTE: ペアリング開始
-            print("*** glass id:", number)
+        // NOTE: message.nameはJavascriptからコールされる関数名
+        if message.name == "helloNative" {
+            let message = message.body as! String
+            print("*** message from native:", message)
         }
     }
 }
