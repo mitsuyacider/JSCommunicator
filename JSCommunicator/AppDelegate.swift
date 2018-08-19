@@ -1,10 +1,4 @@
-//
-//  AppDelegate.swift
-//  JSCommunicator
-//
-//  Created by mw on 2018/08/19.
 //  Copyright © 2018年 mw. All rights reserved.
-//
 
 import UIKit
 
