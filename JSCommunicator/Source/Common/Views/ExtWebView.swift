@@ -23,18 +23,27 @@ class ExtWebView: WKWebView, WKUIDelegate {
     }
     
     /*
-     @param: address 接続先URL
+     @param address: 接続先URL(IP Address: https://www.xxxxx.xx.xx)
      */
     func loadWithAddress(address: String) {
         let myURL = URL(string: address)
         let myRequest = URLRequest(url: myURL!)
+        self.load(myRequest)                
+    }
+    
+    /*
+     @param address: ローカルhtmlファイルアドレス
+     */
+    func loadWithLocalAddress(address: String) {
+        let myURL = URL(fileURLWithPath: address)
+        let myRequest = URLRequest(url: myURL)
         self.load(myRequest)
     }
     
     /*
      Javascriptにデータを送信する
-     @param: command Javascriptで呼び出す関数名
-     @param: payload Javascriptに渡すデータ
+     @param command: Javascriptで呼び出す関数名
+     @param payload: Javascriptに渡すデータ
      */
     func notify2JS(command: String, payload : [String:Any]) {
         // create json data

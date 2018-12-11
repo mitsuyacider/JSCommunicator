@@ -11,9 +11,7 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
     
     // MARK: - Properties (Data)
     
-    override func viewDidLayoutSubviews() {
-        print(viewContainer)
-    }
+    override func viewDidLayoutSubviews() {}
     
     // MARK: - Lifecycle
 
@@ -36,6 +34,14 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
         webView = ExtWebView(frame: .zero, configuration: webConfiguration)
         webView.loadWithAddress(address: Settings.serverAddress)
 
+        // NOTE: ローカルファイルを読み込む場合(reference folder)
+        let path = Bundle.main.path(forResource: "www/index", ofType: "html")!
+        webView.loadWithLocalAddress(address: path)
+        
+        // NOTE: インターネット上のファイルを読み込む場合
+//        let path = "https://google.com/"
+//        webView.loadWithAddress(address: path)
+        
         self.view.addSubview(webView)
         
         createDummyButton()
@@ -75,7 +81,7 @@ extension ViewController: WKScriptMessageHandler {
         // NOTE: message.nameはJavascriptからコールされる関数名
         if message.name == "helloNative" {
             let message = message.body as! String
-            print("*** message from native:", message)
+            print("*** message from JavaScript:", message)
         }
     }
 }
