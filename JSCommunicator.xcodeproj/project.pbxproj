@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CE0426C921BFBEB100B66DC8 /* www in Resources */ = {isa = PBXBuildFile; fileRef = CE0426C821BFBEB100B66DC8 /* www */; };
 		CE5F06D8212904C1003E8FF9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5F06D7212904C1003E8FF9 /* AppDelegate.swift */; };
 		CE5F06DD212904C1003E8FF9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE5F06DB212904C1003E8FF9 /* Main.storyboard */; };
 		CE5F06DF212904C1003E8FF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE5F06DE212904C1003E8FF9 /* Assets.xcassets */; };
@@ -16,10 +15,10 @@
 		CE5F06EF2129078B003E8FF9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5F06EE2129078B003E8FF9 /* ViewController.swift */; };
 		CE5F06F7212907B1003E8FF9 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5F06F4212907B1003E8FF9 /* Settings.swift */; };
 		CE5F06F8212907B1003E8FF9 /* ExtWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5F06F6212907B1003E8FF9 /* ExtWebView.swift */; };
+		CEAECED721C771F6007A2E18 /* www in Resources */ = {isa = PBXBuildFile; fileRef = CEAECED621C771F6007A2E18 /* www */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		CE0426C821BFBEB100B66DC8 /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; path = www; sourceTree = "<group>"; };
 		CE5F06D4212904C1003E8FF9 /* JSCommunicator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JSCommunicator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE5F06D7212904C1003E8FF9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE5F06DC212904C1003E8FF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -30,6 +29,7 @@
 		CE5F06EE2129078B003E8FF9 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = JSCommunicator/Source/Main/ViewController.swift; sourceTree = SOURCE_ROOT; };
 		CE5F06F4212907B1003E8FF9 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		CE5F06F6212907B1003E8FF9 /* ExtWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtWebView.swift; sourceTree = "<group>"; };
+		CEAECED621C771F6007A2E18 /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; path = www; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,7 +63,7 @@
 		CE5F06D6212904C1003E8FF9 /* JSCommunicator */ = {
 			isa = PBXGroup;
 			children = (
-				CE0426C821BFBEB100B66DC8 /* www */,
+				CEAECED621C771F6007A2E18 /* www */,
 				CE5F06EB2129074D003E8FF9 /* Source */,
 				CE5F06D7212904C1003E8FF9 /* AppDelegate.swift */,
 				CE5F06DB212904C1003E8FF9 /* Main.storyboard */,
@@ -179,7 +179,7 @@
 				CE5F06EA21290667003E8FF9 /* Settings.bundle in Resources */,
 				CE5F06E2212904C1003E8FF9 /* LaunchScreen.storyboard in Resources */,
 				CE5F06DF212904C1003E8FF9 /* Assets.xcassets in Resources */,
-				CE0426C921BFBEB100B66DC8 /* www in Resources */,
+				CEAECED721C771F6007A2E18 /* www in Resources */,
 				CE5F06DD212904C1003E8FF9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

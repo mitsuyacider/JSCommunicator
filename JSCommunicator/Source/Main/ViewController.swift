@@ -26,7 +26,8 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
         // NOTE: Javascriptからのcallback名を指定する。
         //       Javascript側は登録したコールバック名を適宜呼び出すことで、Nativeと連携できる。
         wkUController.add(self, name: "helloNative")
-        
+        wkUController.add(self, name: "onTapWord")
+
         let webConfiguration = WKWebViewConfiguration()
         webConfiguration.userContentController = wkUController
         // NOTE: LocalStorageを許可
@@ -38,8 +39,8 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
         let path = Bundle.main.path(forResource: "www/index", ofType: "html")!
         webView.loadWithLocalAddress(address: path)
         
-        // NOTE: インターネット上のファイルを読み込む場合
-//        let path = "https://google.com/"
+//        // NOTE: インターネット上のファイルを読み込む場合
+//        let path = "https://sandbox.gocco.co.jp/webgl/"
 //        webView.loadWithAddress(address: path)
         
         self.view.addSubview(webView)
@@ -82,6 +83,14 @@ extension ViewController: WKScriptMessageHandler {
         if message.name == "helloNative" {
             let message = message.body as! String
             print("*** message from JavaScript:", message)
+        } else if (message.name == "onTapWord") {
+            guard let contentBody = message.body as? String,
+                let data = contentBody.data(using: String.Encoding.utf8) else { return }
+            if let json = try! JSONSerialization.jsonObject(with: data, options:JSONSerialization.ReadingOptions.allowFragments) as? Dictionary<String, Any> {
+            
+                let word = json["word"]
+                print("word: ", word as! String)
+            }
         }
     }
 }
