@@ -45,21 +45,30 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
         
         self.view.addSubview(webView)
         
-        createDummyButton()
+        let margin:CGFloat = 20.0
+        let screenWidth:CGFloat = self.view.frame.width
+        let screenHeight:CGFloat = self.view.frame.height
+
+        let width:CGFloat = (screenWidth / 3.0) - margin
+        let height:CGFloat = 30.0
+        let y:CGFloat = screenHeight - height - margin
+        for i in 1..<4 {
+            let title = "pattern-" + String(i)
+            let x = CGFloat(i - 1) * width + margin * CGFloat(i - 1) + margin / 2
+            let frame:CGRect = CGRect(x: x, y: y, width: width, height: height)
+            createDummyButton(title: title, frame: frame)
+        }
     }
     
     // NOTE: This code comes from following link.
     //       https://i-app-tec.com/ios/button-code.html
-    func createDummyButton() {
+    func createDummyButton(title: String, frame: CGRect) {
         // スクリーンの横縦幅
-        let screenWidth:CGFloat = self.view.frame.width
-        let screenHeight:CGFloat = self.view.frame.height
-        
         let button = UIButton()
-        button.frame = CGRect(x:screenWidth/4, y:screenHeight/2,
-                              width:screenWidth/2, height:50)
-        button.setTitle("Notify 2 JS!", for:UIControlState.normal)
-        button.titleLabel?.font =  UIFont.systemFont(ofSize: 36)
+        button.frame = CGRect(x:frame.minX, y:frame.minY,
+                              width:frame.width, height:frame.height)
+        button.setTitle(title, for:UIControlState.normal)
+        button.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
         button.backgroundColor = UIColor.init(
             red:0.9, green: 0.9, blue: 0.9, alpha: 1)
         button.addTarget(self,
