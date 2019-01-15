@@ -57,13 +57,13 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
             let title = "pattern-" + String(i)
             let x = CGFloat(i - 1) * width + margin * CGFloat(i - 1) + margin / 2
             let frame:CGRect = CGRect(x: x, y: y, width: width, height: height)
-            createDummyButton(title: title, frame: frame)
+            createDummyButton(title: title, frame: frame, tag: i)
         }
     }
     
     // NOTE: This code comes from following link.
     //       https://i-app-tec.com/ios/button-code.html
-    func createDummyButton(title: String, frame: CGRect) {
+    func createDummyButton(title: String, frame: CGRect, tag: Int) {
         // スクリーンの横縦幅
         let button = UIButton()
         button.frame = CGRect(x:frame.minX, y:frame.minY,
@@ -72,6 +72,7 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
         button.titleLabel?.font =  UIFont.systemFont(ofSize: 16)
         button.backgroundColor = UIColor.init(
             red:0.9, green: 0.9, blue: 0.9, alpha: 1)
+        button.tag = tag
         button.addTarget(self,
                          action: #selector(ViewController.buttonTapped(sender:)),
                          for: .touchUpInside)
@@ -83,7 +84,8 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
     
     @objc func buttonTapped(sender: UIButton) {
         // NOTE: Javascriptへメッセージを送信する
-        webView.notify2JS(command: "NativeCommunicator.helloJavascript", payload: ["message":NSUUID().uuidString])
+        let data = ["id": 0, "pattern": sender.tag]
+        webView.notify2JS(command: "NativeCommunicator.onSelection", payload: data)
     }
 }
 
