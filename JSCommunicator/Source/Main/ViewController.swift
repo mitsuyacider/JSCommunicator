@@ -32,6 +32,7 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
         webConfiguration.userContentController = wkUController
         // NOTE: LocalStorageを許可
         webConfiguration.websiteDataStore = WKWebsiteDataStore.default()
+        webConfiguration.preferences.setValue(true, forKey: "allowFileAccessFromFileURLs")
         webView = ExtWebView(frame: .zero, configuration: webConfiguration)
         webView.loadWithAddress(address: Settings.serverAddress)
 
