@@ -37,7 +37,8 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
         webView.loadWithAddress(address: Settings.serverAddress)
 
         // NOTE: ローカルファイルを読み込む場合(reference folder)
-        let path = Bundle.main.path(forResource: "www/index", ofType: "html")!
+        // CAUTION: 「Create reference folder」Webリソースはとして追加する必要がある。
+        let path = Bundle.main.path(forResource: "path/to/index", ofType: "html")!
         webView.loadWithLocalAddress(address: path)
         
 //        // NOTE: インターネット上のファイルを読み込む場合
